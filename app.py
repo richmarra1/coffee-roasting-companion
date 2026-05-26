@@ -454,6 +454,16 @@ if not st.session_state.messages:
 
 
 # ---------------------------------------------------------------------------
+# New Conversation button (shown when there are messages)
+# ---------------------------------------------------------------------------
+if st.session_state.messages:
+    if st.button("☕ New Conversation", key="reset_btn"):
+        st.session_state.messages = []
+        st.session_state.sources = {}
+        st.rerun()
+
+
+# ---------------------------------------------------------------------------
 # Chat Input
 # ---------------------------------------------------------------------------
 if prompt := st.chat_input("Ask me anything about coffee roasting..."):
