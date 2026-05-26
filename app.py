@@ -380,6 +380,32 @@ st.markdown("""
 
 
 # ---------------------------------------------------------------------------
+# Handle pending query from topic buttons (must run before rendering)
+# ---------------------------------------------------------------------------
+if "pending_query" in st.session_state:
+    query = st.session_state.pending_query
+    del st.session_state.pending_query
+
+    # Add user message
+    st.session_state.messages.append({"role": "user", "content": query})
+
+    # Retrieve
+    retrieved = retrieve(query, KNOWLEDGE_BASE, DOC_TOKENS, DF, top_k=3)
+
+    # Generate
+    response_text, sources = generate_response(
+        query, retrieved,
+        [m for m in st.session_state.messages[:-1] if m["role"] in ("user", "assistant")]
+    )
+
+    # Store
+    msg_idx = len(st.session_state.messages)
+    st.session_state.messages.append({"role": "assistant", "content": response_text})
+    if sources:
+        st.session_state.sources[msg_idx] = sources
+
+
+# ---------------------------------------------------------------------------
 # Chat History
 # ---------------------------------------------------------------------------
 for i, msg in enumerate(st.session_state.messages):
@@ -425,34 +451,6 @@ if not st.session_state.messages:
             if st.button(f"{topic['icon']} {topic['label']}\n{topic['desc']}", key=f"topic_{i}"):
                 st.session_state.pending_query = topic["query"]
                 st.rerun()
-
-
-# ---------------------------------------------------------------------------
-# Handle pending query from topic buttons
-# ---------------------------------------------------------------------------
-if "pending_query" in st.session_state:
-    query = st.session_state.pending_query
-    del st.session_state.pending_query
-
-    # Add user message
-    st.session_state.messages.append({"role": "user", "content": query})
-
-    # Retrieve
-    retrieved = retrieve(query, KNOWLEDGE_BASE, DOC_TOKENS, DF, top_k=3)
-
-    # Generate
-    response_text, sources = generate_response(
-        query, retrieved,
-        [m for m in st.session_state.messages[:-1] if m["role"] in ("user", "assistant")]
-    )
-
-    # Store
-    msg_idx = len(st.session_state.messages)
-    st.session_state.messages.append({"role": "assistant", "content": response_text})
-    if sources:
-        st.session_state.sources[msg_idx] = sources
-
-    st.rerun()
 
 
 # ---------------------------------------------------------------------------
