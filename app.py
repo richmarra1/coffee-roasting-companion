@@ -14,7 +14,10 @@ from collections import Counter
 from anthropic import Anthropic
 
 # Import knowledge base
-from knowledge.coffee_knowledge import KNOWLEDGE_BASE
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'knowledge'))
+from coffee_knowledge import KNOWLEDGE_BASE
 
 # ---------------------------------------------------------------------------
 # Page Configuration
