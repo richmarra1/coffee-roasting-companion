@@ -21,7 +21,7 @@ from knowledge.coffee_knowledge import KNOWLEDGE_BASE
 # ---------------------------------------------------------------------------
 st.set_page_config(
     page_title="Coffee Roasting Companion",
-    page_icon="☕",
+    page_icon="â˜•",
     layout="centered",
     initial_sidebar_state="collapsed",
 )
@@ -246,14 +246,14 @@ DOMAIN_LABELS = {
 }
 
 DOMAIN_ICONS = {
-    "origins": "🌍",
-    "roasting_science": "🔬",
-    "roast_levels": "🎨",
-    "home_roasting": "🏠",
-    "troubleshooting": "🔧",
-    "brewing": "☕",
-    "fun_facts": "✨",
-    "beginner": "🚀",
+    "origins": "ðŸŒ",
+    "roasting_science": "ðŸ”¬",
+    "roast_levels": "ðŸŽ¨",
+    "home_roasting": "ðŸ ",
+    "troubleshooting": "ðŸ”§",
+    "brewing": "â˜•",
+    "fun_facts": "âœ¨",
+    "beginner": "ðŸš€",
 }
 
 
@@ -335,11 +335,11 @@ if "sources" not in st.session_state:
 def render_sources(sources, msg_idx):
     """Render source cards for a response."""
     if sources:
-        with st.expander(f"📚 Sources ({len(sources)} documents retrieved)", expanded=False):
+        with st.expander(f"ðŸ“š Sources ({len(sources)} documents retrieved)", expanded=False):
             for s in sources:
                 doc = s["document"]
                 domain = doc.get("domain", "general")
-                icon = DOMAIN_ICONS.get(domain, "📄")
+                icon = DOMAIN_ICONS.get(domain, "ðŸ“„")
                 label = DOMAIN_LABELS.get(domain, domain)
                 st.markdown(f"""
                 <div class="source-card">
@@ -357,7 +357,7 @@ def render_sources(sources, msg_idx):
 # ---------------------------------------------------------------------------
 st.markdown("""
 <div class="app-header">
-    <div class="app-logo">☕</div>
+    <div class="app-logo">â˜•</div>
     <div>
         <div class="app-title">Coffee Roasting Companion</div>
         <div class="app-subtitle">RAG-powered guide for home coffee roasters | Ask anything about roasting, beans, and brewing</div>
@@ -383,7 +383,7 @@ for i, msg in enumerate(st.session_state.messages):
     if msg["role"] == "assistant":
         st.markdown(f"""
         <div class="assistant-bubble">
-            <div class="assistant-label">☕ Coffee Roasting Companion</div>
+            <div class="assistant-label">â˜• Coffee Roasting Companion</div>
             {msg['content']}
         </div>
         """, unsafe_allow_html=True)
@@ -402,18 +402,18 @@ for i, msg in enumerate(st.session_state.messages):
 if not st.session_state.messages:
     st.markdown("""
     <div class="assistant-bubble">
-        <div class="assistant-label">☕ Coffee Roasting Companion</div>
+        <div class="assistant-label">â˜• Coffee Roasting Companion</div>
         Hey! I am your Coffee Roasting Companion, here to help you learn everything about roasting coffee at home. Whether you are thinking about your first roast or trying to troubleshoot that batch that came out tasting like cardboard, I have got you covered. I pull from a curated knowledge base of roasting science, bean origins, brewing tips, and beginner guides to give you grounded, useful answers. What do you want to explore?
     </div>
     """, unsafe_allow_html=True)
 
     topics = [
-        {"icon": "🚀", "label": "My First Roast", "desc": "Step-by-step guide to roasting your first batch", "query": "How do I roast coffee at home for the first time?"},
-        {"icon": "🌍", "label": "Bean Origins", "desc": "How growing region shapes what is in your cup", "query": "What are the major coffee growing regions and how do they taste different?"},
-        {"icon": "🔬", "label": "Roasting Science", "desc": "What is actually happening inside the bean?", "query": "What happens during the coffee roasting process? Explain the stages and the chemistry."},
-        {"icon": "🔧", "label": "Fix My Roast", "desc": "Troubleshoot sour, flat, or bitter coffee", "query": "My home roasted coffee tastes sour and grassy. What am I doing wrong?"},
-        {"icon": "🏠", "label": "Equipment Guide", "desc": "From popcorn poppers to the Aillio Bullet", "query": "What equipment do I need to start roasting coffee at home?"},
-        {"icon": "☕", "label": "Brewing Tips", "desc": "Get the most out of what you roasted", "query": "How should I brew my home roasted coffee? What grind size and rest time?"},
+        {"icon": "ðŸš€", "label": "My First Roast", "desc": "Step-by-step guide to roasting your first batch", "query": "How do I roast coffee at home for the first time?"},
+        {"icon": "ðŸŒ", "label": "Bean Origins", "desc": "How growing region shapes what is in your cup", "query": "What are the major coffee growing regions and how do they taste different?"},
+        {"icon": "ðŸ”¬", "label": "Roasting Science", "desc": "What is actually happening inside the bean?", "query": "What happens during the coffee roasting process? Explain the stages and the chemistry."},
+        {"icon": "ðŸ”§", "label": "Fix My Roast", "desc": "Troubleshoot sour, flat, or bitter coffee", "query": "My home roasted coffee tastes sour and grassy. What am I doing wrong?"},
+        {"icon": "ðŸ ", "label": "Equipment Guide", "desc": "From popcorn poppers to the Aillio Bullet", "query": "What equipment do I need to start roasting coffee at home?"},
+        {"icon": "â˜•", "label": "Brewing Tips", "desc": "Get the most out of what you roasted", "query": "How should I brew my home roasted coffee? What grind size and rest time?"},
     ]
 
     cols = st.columns(2)
