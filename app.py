@@ -27,14 +27,14 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------------------------
-# Custom CSS - Warm coffee theme
+# Custom CSS - Warm light coffee theme
 # ---------------------------------------------------------------------------
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
     .stApp {
-        background: linear-gradient(180deg, #1a120b 0%, #1e1510 30%, #231a12 60%, #1a120b 100%);
+        background: #faf6f1 !important;
     }
     .block-container { padding-top: 1rem; max-width: 860px; }
     h1, h2, h3, h4, h5, h6, p, li, span, div { font-family: 'Inter', sans-serif !important; }
@@ -51,88 +51,89 @@ st.markdown("""
     }
     .app-logo {
         width: 48px; height: 48px; border-radius: 12px;
-        background: linear-gradient(135deg, #c8a27a 0%, #8b6f47 100%);
+        background: linear-gradient(135deg, #8b6f47 0%, #6b5234 100%);
         display: flex; align-items: center; justify-content: center;
         font-size: 24px; flex-shrink: 0;
-        box-shadow: 0 4px 16px rgba(200,162,122,0.25);
+        box-shadow: 0 4px 16px rgba(107,82,52,0.2);
     }
     .app-title {
         font-family: 'DM Serif Display', serif !important;
-        font-size: 24px; font-weight: 400; color: #f5e6d3;
+        font-size: 24px; font-weight: 400; color: #3d2e1f;
         letter-spacing: -0.02em;
     }
     .app-subtitle { font-size: 12px; color: #8b7355; margin-top: 2px; }
 
     /* Chat bubbles */
     .assistant-bubble {
-        background: rgba(46,35,25,0.7); border: 1px solid rgba(200,162,122,0.12);
+        background: #ffffff; border: 1px solid #e8dfd4;
         border-radius: 2px 18px 18px 18px; padding: 18px 22px;
-        font-size: 14px; line-height: 1.75; color: #d4c4b0;
+        font-size: 14px; line-height: 1.75; color: #3d2e1f;
         max-width: 90%; margin-bottom: 14px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
     .assistant-label {
         font-size: 9px; font-weight: 700; text-transform: uppercase;
-        letter-spacing: 0.12em; color: #c8a27a; margin-bottom: 8px;
+        letter-spacing: 0.12em; color: #8b6f47; margin-bottom: 8px;
         display: flex; align-items: center; gap: 6px;
     }
     .user-bubble {
-        background: linear-gradient(135deg, #5c3d2e 0%, #6b4c3b 100%);
+        background: linear-gradient(135deg, #8b6f47 0%, #6b5234 100%);
         border-radius: 18px 2px 18px 18px; padding: 12px 20px;
-        font-size: 14px; line-height: 1.5; color: #f5e6d3;
+        font-size: 14px; line-height: 1.5; color: #ffffff;
         max-width: 75%; margin-left: auto; margin-bottom: 14px;
         text-align: right;
     }
 
     /* Source cards */
     .source-card {
-        background: rgba(46,35,25,0.5); border: 1px solid rgba(139,115,85,0.2);
+        background: #f5efe8; border: 1px solid #e8dfd4;
         border-radius: 8px; padding: 10px 14px; margin-top: 4px; margin-bottom: 4px;
-        font-size: 11px; color: #8b7355;
+        font-size: 11px; color: #6b5540;
     }
-    .source-title { font-weight: 600; color: #c8a27a; font-size: 12px; }
+    .source-title { font-weight: 600; color: #5c3d2e; font-size: 12px; }
     .source-domain {
         display: inline-block; padding: 2px 8px; border-radius: 4px;
-        background: rgba(200,162,122,0.12); font-size: 9px;
+        background: #ebe3d7; font-size: 9px;
         font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
-        color: #c8a27a;
+        color: #8b6f47;
     }
 
     /* Topic cards */
     .topic-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0; }
     .topic-card {
-        background: rgba(46,35,25,0.5); border: 1px solid rgba(139,115,85,0.2);
+        background: #ffffff; border: 1px solid #e8dfd4;
         border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.2s;
     }
-    .topic-card:hover { background: rgba(200,162,122,0.1); border-color: rgba(200,162,122,0.3); }
+    .topic-card:hover { background: #f5efe8; border-color: #c8a27a; }
     .topic-icon { font-size: 22px; margin-bottom: 6px; }
-    .topic-label { font-size: 13px; font-weight: 600; color: #f5e6d3; margin-bottom: 4px; }
+    .topic-label { font-size: 13px; font-weight: 600; color: #3d2e1f; margin-bottom: 4px; }
     .topic-desc { font-size: 11px; color: #8b7355; line-height: 1.4; }
 
     /* Input styling */
-    .stChatInput > div { background: rgba(46,35,25,0.6) !important; border-color: rgba(139,115,85,0.3) !important; }
-    .stChatInput textarea { color: #f5e6d3 !important; font-family: 'Inter', sans-serif !important; }
+    .stChatInput > div { background: #ffffff !important; border-color: #e8dfd4 !important; }
+    .stChatInput textarea { color: #3d2e1f !important; font-family: 'Inter', sans-serif !important; }
 
     /* Button overrides */
     .stButton > button {
-        background: rgba(46,35,25,0.4) !important; border: 1px solid rgba(139,115,85,0.3) !important;
+        background: #ffffff !important; border: 1px solid #e8dfd4 !important;
         border-radius: 10px !important; padding: 10px 16px !important;
-        font-size: 13px !important; color: #8b7355 !important;
+        font-size: 13px !important; color: #5c3d2e !important;
         font-family: 'Inter', sans-serif !important; width: 100% !important;
         text-align: left !important;
     }
     .stButton > button:hover {
-        background: rgba(200,162,122,0.1) !important;
-        border-color: rgba(200,162,122,0.4) !important;
-        color: #c8a27a !important;
+        background: #f5efe8 !important;
+        border-color: #c8a27a !important;
+        color: #3d2e1f !important;
     }
 
     /* Sidebar */
-    .css-1d391kg, [data-testid="stSidebar"] { background: #1a120b !important; }
+    .css-1d391kg, [data-testid="stSidebar"] { background: #faf6f1 !important; }
 
     /* Footer */
     .app-footer {
         text-align: center; padding: 40px 0 20px;
-        font-size: 11px; color: #3d2e1f;
+        font-size: 11px; color: #c8b89e;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -309,7 +310,7 @@ FORMATTING:
 
     try:
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-3-5-sonnet-20241022",
             max_tokens=1024,
             system=system_prompt,
             messages=messages
@@ -367,10 +368,10 @@ st.markdown("""
 # Architecture badge
 st.markdown("""
 <div style="display: flex; gap: 8px; margin: 10px 0 20px; flex-wrap: wrap;">
-    <span style="display: inline-block; padding: 3px 10px; border-radius: 4px; background: rgba(200,162,122,0.12); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #c8a27a;">RAG Architecture</span>
-    <span style="display: inline-block; padding: 3px 10px; border-radius: 4px; background: rgba(200,162,122,0.12); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #c8a27a;">25 Knowledge Documents</span>
-    <span style="display: inline-block; padding: 3px 10px; border-radius: 4px; background: rgba(200,162,122,0.12); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #c8a27a;">8 Domains</span>
-    <span style="display: inline-block; padding: 3px 10px; border-radius: 4px; background: rgba(200,162,122,0.12); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #c8a27a;">Claude API</span>
+    <span style="display: inline-block; padding: 3px 10px; border-radius: 4px; background: #ebe3d7; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #8b6f47;">RAG Architecture</span>
+    <span style="display: inline-block; padding: 3px 10px; border-radius: 4px; background: #ebe3d7; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #8b6f47;">25 Knowledge Documents</span>
+    <span style="display: inline-block; padding: 3px 10px; border-radius: 4px; background: #ebe3d7; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #8b6f47;">8 Domains</span>
+    <span style="display: inline-block; padding: 3px 10px; border-radius: 4px; background: #ebe3d7; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #8b6f47;">Claude API</span>
 </div>
 """, unsafe_allow_html=True)
 
